@@ -1,0 +1,8 @@
+
+
+yml 설정 파일 내용을 웹으로 확인해 보고 싶을 때에는 다음과 같이 호출하면 된다.
+http://localhost:8888/{APPLICATION_NAME}/{profiles}
+http://localhost:8888/eureka-service/master
+
+git에 저장되어 있는 yml을 업데이트 한 후 http://localhost:8888/eureka-service/master 호출하면 다음과 같이 업데이트 된 내용이 로그로 출력된다.
+Fetched for remote master and found 1 updates
