@@ -17,46 +17,19 @@ import org.springframework.web.client.RestTemplate;
 
 @EnableEurekaClient
 @SpringBootApplication
-public class FrontServiceApplication {
+public class OrderServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FrontServiceApplication.class, args);
+		SpringApplication.run(OrderServiceApplication.class, args);
 	}
 }
 
 @RefreshScope
 @RestController
-class MessageRestController {
+class TestController {
 
-    @Autowired
-    private RestTemplate restTemplate;
-
-    @Value("${welcome.message:Hello default}")
-    private String message;
-
-    @RequestMapping("/message")
-    String getMessage() {
-        return this.message;
+    @RequestMapping("/welcome")
+    String welcome() {
+        return "welcome order service!! #1";
     }
-
-    /**
-     * 클라이언트 사이드 로드밸런싱 처리 Ribbon + RestTemplate
-     * @return
-     */
-    @RequestMapping("/load")
-    String loadBalancer() {
-        String result = restTemplate.exchange( "http://order-service/welcome", HttpMethod.GET, null, new ParameterizedTypeReference<String>() { }, 1).getBody();
-        return result;
-    }
-}
-
-@Configuration
-class Config {
-
-    @LoadBalanced
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
-
 }

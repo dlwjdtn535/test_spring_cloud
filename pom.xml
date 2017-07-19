@@ -10,6 +10,7 @@
         <module>config-service</module>
         <module>eureka-service</module>
         <module>front-service</module>
+        <module>order-service</module>
         <module>hystrix-dashboard</module>
     </modules>
 </project>
