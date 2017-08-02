@@ -1,5 +1,6 @@
 package com.example;
 
+import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -7,14 +8,19 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+@EnableFeignClients
 @EnableEurekaClient
 @SpringBootApplication
 public class FrontServiceApplication {
@@ -34,6 +40,10 @@ class MessageRestController {
     @Value("${welcome.message:Hello default}")
     private String message;
 
+    @Autowired
+    private OrderServiceFeignClient orderServiceFeignClient;
+
+
     @RequestMapping("/message")
     String getMessage() {
         return this.message;
@@ -48,6 +58,16 @@ class MessageRestController {
         String result = restTemplate.exchange( "http://order-service/welcome", HttpMethod.GET, null, new ParameterizedTypeReference<String>() { }, 1).getBody();
         return result;
     }
+
+
+    /**
+     * feign 테스트
+     * @return
+     */
+    @RequestMapping("/feign")
+    String feign() {
+        return orderServiceFeignClient.welcome("param1");
+    }
 }
 
 @Configuration
@@ -58,5 +78,12 @@ class Config {
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
+}
+
+@FeignClient(value = "order-service")
+interface OrderServiceFeignClient {
+
+    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
+    String welcome(@RequestParam("name") String param);
 
 }
