@@ -30,6 +30,6 @@ class TestController {
 
     @RequestMapping("/welcome")
     String welcome() {
-        return "welcome order service!! #1111";
+        return "welcome order service!! #1";
     }
 }

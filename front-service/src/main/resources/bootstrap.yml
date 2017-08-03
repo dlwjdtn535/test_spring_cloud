@@ -3,5 +3,5 @@ spring:
     name: front-service
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: https://config-service-dot-test-spring-cloud.appspot.com
       fail-fast: true

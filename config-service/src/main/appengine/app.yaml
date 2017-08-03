@@ -1,2 +1,26 @@
+
+# Required if creating a service. Optional for the default service.
+# Each service and each version must have a name.
+# A name can contain numbers, letters, and hyphens.
+# It cannot be longer than 63 characters and cannot start or end with a hyphen.
+# Choose a unique name for each service and each version.
+# Don't reuse names between services and versions.
+service: config-service
+
+# This setting is required.
+# It is name of the App Engine language runtime used by this application.
+# To specify Custom Runtime, use custom-runtimes.
+# Other runtimes are available; refer to each languages's documentation for more info.
 runtime: java
+
+# Select the flexible environment.
 env: flex
+
+# Enable/disable health checks. Health checks are enabled by default.
+# To disable health checking, set to False.
+health_check:
+  enable_health_check: False
+
+# instances : The number of instances to assign to the service at the start.
+manual_scaling:
+  instances: 1
