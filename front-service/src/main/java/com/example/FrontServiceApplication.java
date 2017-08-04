@@ -43,14 +43,9 @@ class MessageRestController {
     private OrderServiceFeignClient orderServiceFeignClient;
 
 
-    @RequestMapping("/front/message")
+    @RequestMapping("/message")
     String getMessage() {
         return this.message;
-    }
-
-    @RequestMapping("/front2/message")
-        String getMessage2() {
-        return "message2 : " + this.message;
     }
 
     /**
@@ -68,7 +63,7 @@ class MessageRestController {
      * feign 테스트
      * @return
      */
-    @RequestMapping("/front/feign")
+    @RequestMapping("/feign")
     String feign() {
         return orderServiceFeignClient.welcome("param1");
     }

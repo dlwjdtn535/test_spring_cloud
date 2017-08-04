@@ -21,13 +21,19 @@ eureka:
       duration: 5
 
 zuul:
+  prefix: /api
   host:
     connect-timeout-millis: 5000
     socket-timeout-millis: 10000
   routes:
-    front-service:
-      path: /front/**
+    front:
+      path: /front-svc/**
       serviceId: front-service
+
+#hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 10000
+#hystrix.threadpool.default.coreSize: 50
+#hystrix.threadpool.default.maxQueueSize: 100
+#hystrix.threadpool.default.queueSizeRejectionThreshold: 50
 
 management:
   security:
