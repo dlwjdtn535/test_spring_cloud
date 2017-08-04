@@ -15,14 +15,9 @@ public class ConfigServiceApplication {
 		SpringApplication.run(ConfigServiceApplication.class, args);
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/test")
     public String home() {
         System.out.println("called root URI!!!");
         return "config-service";
     }
-
-//    @RequestMapping("/_ah/health")
-//    public String healthy() {
-//        return "Still surviving.";
-//    }
 }
