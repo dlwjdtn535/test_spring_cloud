@@ -11,6 +11,7 @@
         <module>eureka-service</module>
         <module>front-service</module>
         <module>order-service</module>
+		<module>proxy-service</module>
         <module>hystrix-dashboard</module>
     </modules>
 </project>

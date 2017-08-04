@@ -1,0 +1,38 @@
+server:
+  port: ${PORT:2220}
+
+spring:
+  application:
+    name: proxy-service
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://172.20.12.23:9999/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+
+zuul:
+  host:
+    connect-timeout-millis: 5000
+    socket-timeout-millis: 10000
+  routes:
+    front-service:
+      path: /front/**
+      serviceId: front-service
+
+management:
+  security:
+    enabled: false
+
+logging:
+  level:
+    root: INFO

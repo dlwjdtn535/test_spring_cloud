@@ -1,6 +1,5 @@
 package com.example;
 
-import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -44,9 +43,14 @@ class MessageRestController {
     private OrderServiceFeignClient orderServiceFeignClient;
 
 
-    @RequestMapping("/message")
+    @RequestMapping("/front/message")
     String getMessage() {
         return this.message;
+    }
+
+    @RequestMapping("/front2/message")
+        String getMessage2() {
+        return "message2 : " + this.message;
     }
 
     /**
@@ -64,7 +68,7 @@ class MessageRestController {
      * feign 테스트
      * @return
      */
-    @RequestMapping("/feign")
+    @RequestMapping("/front/feign")
     String feign() {
         return orderServiceFeignClient.welcome("param1");
     }

@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: proxy-service
+  cloud:
+    config:
+      uri: http://172.20.12.23:8888
+      fail-fast: true
