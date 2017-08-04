@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:8080}
+  port: ${PORT:9999}
 
 eureka:
   instance:
@@ -9,7 +9,7 @@ eureka:
     register-with-eureka: false
     fetch-registry: false
     serviceUrl:
-      defaultZone: https://eureka-service-dot-test-spring-cloud.appspot.com/eureka/
+      defaultZone: http://localhost:9999/eureka/
   datacenter: mycenter
   environment: test
 

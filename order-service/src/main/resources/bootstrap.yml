@@ -3,5 +3,5 @@ spring:
     name: order-service
   cloud:
     config:
-      uri: https://config-service-dot-test-spring-cloud.appspot.com
+      uri: http://172.20.12.23:8888
       fail-fast: true

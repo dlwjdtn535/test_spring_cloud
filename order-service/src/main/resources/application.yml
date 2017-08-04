@@ -10,7 +10,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: https://eureka-service-dot-test-spring-cloud.appspot.com/eureka/
+      defaultZone: http://172.20.12.23:9999/eureka/
     healthcheck:
       enabled: true
     lease:
