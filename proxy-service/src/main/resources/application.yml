@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:2220}
+  port: 2220
 
 spring:
   application:
@@ -7,14 +7,14 @@ spring:
 
 eureka:
   instance:
+    prefer-ip-address: true
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
-    prefer-ip-address: true
   client:
     register-with-eureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: http://172.20.12.23:9999/eureka/
+      defaultZone: http://localhost:9999/eureka/
     healthcheck:
       enabled: true
     lease:
@@ -30,11 +30,6 @@ zuul:
       path: /front-svc/**
       serviceId: front-service
 
-#hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 10000
-#hystrix.threadpool.default.coreSize: 50
-#hystrix.threadpool.default.maxQueueSize: 100
-#hystrix.threadpool.default.queueSizeRejectionThreshold: 50
-
 management:
   security:
     enabled: false
@@ -42,3 +37,13 @@ management:
 logging:
   level:
     root: INFO
+
+---
+spring:
+  profiles: gae
+server:
+  port: 8080
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: https://eureka-service-dot-nklee-project.appspot.com/eureka/

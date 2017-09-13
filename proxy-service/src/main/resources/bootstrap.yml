@@ -3,5 +3,13 @@ spring:
     name: proxy-service
   cloud:
     config:
-      uri: http://172.20.12.23:8888
+      uri: http://localhost:8888
       fail-fast: true
+
+---
+spring:
+  profiles: gae
+  cloud:
+    config:
+     uri: https://config-service-dot-nklee-project.appspot.com
+     failFast: true

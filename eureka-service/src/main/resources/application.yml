@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:9999}
+  port: 9999
 
 eureka:
   instance:
@@ -13,8 +13,15 @@ eureka:
   datacenter: mycenter
   environment: test
 
-
-
-
 welcome:
   message: I am eureka service
+
+---
+spring:
+  profiles: gae
+server:
+  port: 8080
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: https://eureka-service-dot-nklee-project.appspot.com/eureka/

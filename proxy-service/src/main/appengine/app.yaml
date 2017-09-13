@@ -1,4 +1,4 @@
-service: order-service
+service: proxy-service
 runtime: java
 env: flex
 

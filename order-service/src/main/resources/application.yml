@@ -1,16 +1,16 @@
 server:
-  port: ${PORT:8080}
-
+  port: 3333
 
 eureka:
   instance:
+    prefer-ip-address: true
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
   client:
     register-with-eureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: http://172.20.12.23:9999/eureka/
+      defaultZone: http://localhost:9999/eureka/
     healthcheck:
       enabled: true
     lease:
@@ -18,3 +18,13 @@ eureka:
 
 welcome:
   message: welcome order service!!
+
+---
+spring:
+  profiles: gae
+server:
+  port: 8080
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: https://eureka-service-dot-nklee-project.appspot.com/eureka/
