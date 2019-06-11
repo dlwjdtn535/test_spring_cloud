@@ -29,7 +29,10 @@ zuul:
     front:
       path: /front-svc/**
       serviceId: front-service
-
+    test:
+      path: /test-svc/**
+      serviceId: front-service
+      
 management:
   security:
     enabled: false
