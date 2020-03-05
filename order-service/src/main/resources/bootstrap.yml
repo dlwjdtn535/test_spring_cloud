@@ -1,11 +1,14 @@
 spring:
   application:
     name: order-service
+  elasticsearch:
+     rest:
+        uris: localhost:9200
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: http://localhost:18888
       fail-fast: true
-
+        
 management:
     endpoints:
         web:

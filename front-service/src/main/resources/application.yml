@@ -1,6 +1,17 @@
 server:
   port: 2222
 
+spring:
+   mvc:
+      view:
+         suffix: .jsp
+         prefix: /WEB-INF/jsp/
+   thymeleaf:
+      prefix: classpath:/templates/
+      suffix: .html
+      cache: false
+      view-names: thymeleaf/*
+
 eureka:
   instance:
     prefer-ip-address: true
@@ -10,15 +21,18 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: http://localhost:9999/eureka/
+      defaultZone: http://localhost:9999/eureka/,http://localhost:9998/eureka/
     healthcheck:
       enabled: true
     lease:
       duration: 5
 
-welcome:
-  message: welcome front service!!
-
+# 리프래시를 위해 추가
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "refresh"
 ---
 spring:
   profiles: gae

@@ -2,6 +2,7 @@ package com.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
@@ -23,7 +24,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 @EnableEurekaClient
 @EnableCircuitBreaker
 @SpringBootApplication
-public class OrderServiceApplication {
+public class OrderServiceApplication implements CommandLineRunner{
 
 	public static void main(String[] args) {
 		SpringApplication.run(OrderServiceApplication.class, args);
@@ -47,7 +48,48 @@ public class OrderServiceApplication {
 		}
 	}
 	
+	@Autowired
+	private CustomerRepository repository;
+
+	@Override
+	public void run(String... args) throws Exception {
+		this.repository.deleteAll();
+		saveCustomers();
+		fetchAllCustomers();
+		fetchIndividualCustomers();
+	}
 	
+	
+	@RequestMapping("/getData")
+	String getData() {
+		return this.repository.findAll().toString();
+	}
+	
+	private void saveCustomers() {
+		this.repository.save(new Customer("Alice", "Smith"));
+		this.repository.save(new Customer("Bob", "Smith"));
+	}
+
+	private void fetchAllCustomers() {
+		System.out.println("Customers found with findAll():");
+		System.out.println("-------------------------------");
+		for (Customer customer : this.repository.findAll()) {
+			System.out.println(customer);
+		}
+		System.out.println();
+	}
+
+	private void fetchIndividualCustomers() {
+		System.out.println("Customer found with findByFirstName('Alice'):");
+		System.out.println("--------------------------------");
+		System.out.println(this.repository.findByFirstName("Alice"));
+
+		System.out.println("Customers found with findByLastName('Smith'):");
+		System.out.println("--------------------------------");
+		for (Customer customer : this.repository.findByLastName("Smith")) {
+			System.out.println(customer);
+		}
+	}
 }
 
 @RefreshScope

@@ -3,9 +3,8 @@ spring:
     name: front-service
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: http://localhost:18888
       fail-fast: true
-
 ---
 spring:
   profiles: gae
